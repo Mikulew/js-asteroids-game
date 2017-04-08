@@ -7,7 +7,7 @@ function Ship() {
     this.modX = 0; // modification X
     this.modY = 0; // modifucation Y
     this.acc = 0.0004; // acceleration
-    this.maxMod = 0.019;
+    this.maxMod = 0.018;
     this.points = [{},{},{}]; // points of ship
 }
 
@@ -52,5 +52,16 @@ Ship.prototype.draw = function() {
         Game.ctx.stroke();
     } else if(Game.key_38 && !this.draw_thrust) {
         this.draw_thrust = true;
+    }
+
+    if (this.points[0].x < 0 && this.points[1].x < 0 && this.points[2].x < 0) {
+        this.x += VAR.W - Math.min(this.points[0].x, this.points[1].x, this.points[2].x) * 0.9;
+    } else if (this.points[0].x > VAR.W && this.points[1].x > VAR.W && this.points[2].x > VAR.W) {
+        this.x -= VAR.W - (VAR.W - Math.max(this.points[0].x, this.points[1].x, this.points[2].x)) * 0.9;
+    }
+    if (this.points[0].y < 0 && this.points[1].y < 0 && this.points[2].y < 0) {
+        this.y += VAR.H - Math.min(this.points[0].y, this.points[1].y, this.points[2].y) * 0.9;
+    } else if (this.points[0].y > VAR.H && this.points[1].y > VAR.H && this.points[2].y > VAR.H) {
+        this.y -= VAR.H - (VAR.H - Math.max(this.points[0].y, this.points[1].y, this.points[2].y)) * 0.9;
     }
 };
