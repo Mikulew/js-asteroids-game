@@ -7,8 +7,9 @@ VAR = {
     W: 0,
     H: 0,
     lastTime: 0,
+    lastUpdate: -1,
     rand: function(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 };
 
@@ -33,6 +34,8 @@ Game = {
                      Game.key_39 = false;
                  } else if (e.keyCode == 39) {
                      Game.key_37 = false;
+                 } else if (e.keyCode == 32) {
+                     new Bullet();
                  }
              }
              else if (e.type = 'keyup') {
@@ -46,7 +49,7 @@ Game = {
         VAR.d = Math.min(VAR.W, VAR.H);
         Game.canvas.width = VAR.W;
         Game.canvas.height = VAR.H;
-        //Game.ctx.fillStyle = "white";
+        Game.ctx.fillStyle = "white";
         Game.ctx.strokeStyle = "white";
         Game.ctx.lineWidth = 3;
         Game.ctx.lineJoin = "round";
@@ -57,6 +60,7 @@ Game = {
             VAR.lastTime = time;
             Game.ctx.clearRect(0, 0, VAR.W, VAR.H);
             Game.ship.draw();
+            Bullet.draw();
         }
     }
 };
