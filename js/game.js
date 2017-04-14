@@ -20,6 +20,9 @@ Game = {
         Game.layout();
         window.addEventListener('resize', Game.layout, false);
         document.body.appendChild(Game.canvas);
+        for (var i = 0; i < 4; i++) {
+            new Rock();
+        }
         Game.ship = new Ship();
         window.addEventListener('keydown', Game.onKey, false);
         window.addEventListener('keyup', Game.onKey, false);
@@ -61,6 +64,7 @@ Game = {
             Game.ctx.clearRect(0, 0, VAR.W, VAR.H);
             Game.ship.draw();
             Bullet.draw();
+            Rock.draw();
         }
     }
 };
