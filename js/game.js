@@ -16,7 +16,9 @@ VAR = {
 Game = {
     init: function() {
         Game.canvas = document.createElement('canvas');
+        Game.hit_canvas = document.createElement('canvas');
         Game.ctx = Game.canvas.getContext('2d');
+        this.hit_ctx = this.hit_canvas.getContext('2d');
         Game.layout();
         window.addEventListener('resize', Game.layout, false);
         document.body.appendChild(Game.canvas);
@@ -27,6 +29,10 @@ Game = {
         window.addEventListener('keydown', Game.onKey, false);
         window.addEventListener('keyup', Game.onKey, false);
         Game.animationLoop();
+    },
+    stop: function() {
+        window.removeEventListener('keydown', Game.onKey, false);
+        window.removeEventListener('keyup', Game.onKey, false);
     },
     onKey: function(e) {
          if (e.keyCode == 32 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39) {
@@ -53,6 +59,9 @@ Game = {
         Game.canvas.width = VAR.W;
         Game.canvas.height = VAR.H;
         Game.ctx.fillStyle = "white";
+        Game.hit_canvas.width = VAR.W;
+        Game.hit_canvas.height = VAR.H;
+        Game.hit_ctx.fillStyle = "#ff0000";
         Game.ctx.strokeStyle = "white";
         Game.ctx.lineWidth = 3;
         Game.ctx.lineJoin = "round";
@@ -63,8 +72,8 @@ Game = {
             VAR.lastTime = time;
             Game.ctx.clearRect(0, 0, VAR.W, VAR.H);
             Game.ship.draw();
-            Bullet.draw();
             Rock.draw();
+            Bullet.draw();
         }
     }
 };
