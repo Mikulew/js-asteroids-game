@@ -74,6 +74,7 @@ Game = {
             Game.ship.draw();
             Rock.draw();
             Bullet.draw();
+            Dot.draw();
         }
     }
 };
