@@ -43,11 +43,6 @@ Rock.prototype.hitTest = function(x, y) {
 };
 
 Rock.prototype.remove = function() {
-    if(this.size > 0) {
-        for (var j = 0; j < 4; j++) {
-            new Rock(this.size-1, this.x, this.y);
-        }
-    }
     Dot.add(this.x, this.y);
     delete Rock.all[this.id];
 };
